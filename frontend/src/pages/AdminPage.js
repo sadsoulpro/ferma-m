@@ -694,9 +694,10 @@ const AdminPage = () => {
                       />
                       <span className="text-gray-400">—</span>
                       <Input
-                        type="number"
+                        type="text"
+                        inputMode="numeric"
                         value={wp.price}
-                        onChange={(e) => updateWeightPrice(index, 'price', e.target.value)}
+                        onChange={(e) => updateWeightPrice(index, 'price', e.target.value.replace(/[^\d.]/g, ''))}
                         className="w-24 h-8 text-sm"
                         placeholder="Цена"
                       />
