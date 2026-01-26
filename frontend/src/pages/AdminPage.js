@@ -20,7 +20,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Package, Grid3X3, ChevronRight, ChevronLeft, Plus, Pencil, Trash2, LogOut, X, Upload, Settings } from "lucide-react";
+import { Package, Grid3X3, ChevronRight, ChevronLeft, Plus, Pencil, Trash2, LogOut, X, Upload, Settings, ChevronUp, ChevronDown } from "lucide-react";
 
 const ADMIN_PASSWORD = "secretboost1";
 
