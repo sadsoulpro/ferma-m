@@ -608,6 +608,9 @@ const AdminPage = () => {
               <span className="font-semibold text-gray-800">Категории</span>
             </div>
             <div className="flex items-center gap-3">
+              <button onClick={() => setCurrentView("dashboard")} className="text-primary hover:text-primary/80 text-sm font-medium">
+                Админ
+              </button>
               <button onClick={() => navigate("/")} className="text-gray-500 hover:text-gray-700 text-sm">
                 На сайт
               </button>
