@@ -152,6 +152,7 @@ const HomePage = () => {
           setIsModalOpen(false);
           setSelectedProduct(null);
         }}
+        onAddToCart={handleCartChange}
       />
 
       {/* Cart Drawer */}
