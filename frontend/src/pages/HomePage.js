@@ -143,6 +143,12 @@ const HomePage = () => {
         <p className="text-xs md:text-sm text-muted-foreground px-4">
           © 2026 Ферма Медовик. Все права защищены.
         </p>
+        <a 
+          href="/privacy" 
+          className="text-xs text-primary hover:underline mt-2 inline-block"
+        >
+          Политика конфиденциальности
+        </a>
       </footer>
 
       {/* Product Modal */}
