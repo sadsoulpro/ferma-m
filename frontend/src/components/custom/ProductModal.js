@@ -30,6 +30,10 @@ const ProductModal = ({ product, category, isOpen, onClose }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl p-0 overflow-hidden bg-white border-0 shadow-2xl">
+        <VisuallyHidden>
+          <DialogTitle>{product?.name || "Товар"}</DialogTitle>
+          <DialogDescription>{product?.description || "Описание товара"}</DialogDescription>
+        </VisuallyHidden>
         <button
           onClick={onClose}
           className="absolute right-4 top-4 z-10 p-2 bg-white/90 rounded-full hover:bg-white transition-colors"
