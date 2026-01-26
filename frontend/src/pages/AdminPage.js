@@ -1029,9 +1029,10 @@ const AdminPage = () => {
                   {promocodeForm.discount_type === "percent" ? "Процент скидки" : "Сумма скидки (₸)"}
                 </Label>
                 <Input
-                  type="number"
+                  type="text"
+                  inputMode="numeric"
                   value={promocodeForm.discount_value}
-                  onChange={(e) => setPromocodeForm(prev => ({ ...prev, discount_value: parseFloat(e.target.value) || 0 }))}
+                  onChange={(e) => setPromocodeForm(prev => ({ ...prev, discount_value: e.target.value.replace(/[^\d.]/g, '') }))}
                   placeholder={promocodeForm.discount_type === "percent" ? "10" : "500"}
                   data-testid="promocode-value-input"
                 />
@@ -1039,9 +1040,10 @@ const AdminPage = () => {
               <div>
                 <Label>Максимальное количество использований</Label>
                 <Input
-                  type="number"
+                  type="text"
+                  inputMode="numeric"
                   value={promocodeForm.max_uses}
-                  onChange={(e) => setPromocodeForm(prev => ({ ...prev, max_uses: parseInt(e.target.value) || 0 }))}
+                  onChange={(e) => setPromocodeForm(prev => ({ ...prev, max_uses: e.target.value.replace(/[^\d]/g, '') }))}
                   placeholder="100"
                   data-testid="promocode-uses-input"
                 />
