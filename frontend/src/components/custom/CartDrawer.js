@@ -238,7 +238,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
               <div className="flex gap-2">
                 <div className="relative flex-1">
                   <Input
-                    placeholder="Введите промокод..."
+                    placeholder="Введите промокод"
                     value={promocode}
                     onChange={(e) => {
                       setPromocode(e.target.value);
