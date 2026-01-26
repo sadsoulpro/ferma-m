@@ -385,9 +385,17 @@ const AdminPage = () => {
         {/* Content */}
         <main className="max-w-6xl mx-auto px-4 py-6">
           <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-2">
-              <Settings className="w-5 h-5 text-gray-400" />
-              <h2 className="font-semibold text-gray-800">Список товаров</h2>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <Settings className="w-5 h-5 text-gray-400" />
+                <h2 className="font-semibold text-gray-800">Список товаров</h2>
+              </div>
+              <button 
+                onClick={() => setCurrentView("categories")}
+                className="text-primary hover:text-primary/80 text-sm font-medium"
+              >
+                Перейти к Категориям →
+              </button>
             </div>
             <Button onClick={() => openProductModal()} className="bg-primary hover:bg-primary/90" data-testid="add-product-btn">
               <Plus className="w-4 h-4 mr-2" />
