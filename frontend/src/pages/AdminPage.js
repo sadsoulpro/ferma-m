@@ -217,6 +217,26 @@ const AdminPage = () => {
     }));
   };
 
+  const updateWeightPrice = (index, field, value) => {
+    setProductForm(prev => ({
+      ...prev,
+      weight_prices: prev.weight_prices.map((wp, i) => 
+        i === index ? { ...wp, [field]: field === 'price' ? parseFloat(value) || 0 : value } : wp
+      )
+    }));
+  };
+
+  const moveWeightPrice = (index, direction) => {
+    const newIndex = index + direction;
+    if (newIndex < 0 || newIndex >= productForm.weight_prices.length) return;
+    
+    setProductForm(prev => {
+      const newWeights = [...prev.weight_prices];
+      [newWeights[index], newWeights[newIndex]] = [newWeights[newIndex], newWeights[index]];
+      return { ...prev, weight_prices: newWeights };
+    });
+  };
+
   const getCategoryName = (categoryId) => {
     return categories.find(c => c.id === categoryId)?.name || "-";
   };
