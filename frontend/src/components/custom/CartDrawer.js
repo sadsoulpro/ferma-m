@@ -107,8 +107,10 @@ const CartDrawer = ({ isOpen, onClose }) => {
       toast.error("Введите ваше имя");
       return false;
     }
-    if (!customerPhone.trim()) {
-      toast.error("Введите номер телефона");
+    // Check if phone has at least 11 digits (full Kazakhstan number)
+    const phoneDigits = customerPhone.replace(/[^\d]/g, '');
+    if (phoneDigits.length < 11) {
+      toast.error("Введите полный номер телефона");
       return false;
     }
     if (cart.length === 0) {
