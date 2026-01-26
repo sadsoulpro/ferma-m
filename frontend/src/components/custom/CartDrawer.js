@@ -12,13 +12,51 @@ const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 const CartDrawer = ({ isOpen, onClose }) => {
   const { cart, removeFromCart, updateQuantity, cartTotal, clearCart } = useCart();
   const [customerName, setCustomerName] = useState("");
-  const [customerPhone, setCustomerPhone] = useState("");
+  const [customerPhone, setCustomerPhone] = useState("+7 ");
   const [promocode, setPromocode] = useState("");
   const [appliedPromo, setAppliedPromo] = useState(null);
   const [promoLoading, setPromoLoading] = useState(false);
 
   const discount = appliedPromo?.discount || 0;
   const finalTotal = Math.max(0, cartTotal - discount);
+
+  const formatPhoneNumber = (value) => {
+    // Remove all non-digits except the leading +
+    let digits = value.replace(/[^\d]/g, '');
+    
+    // Ensure it starts with 7 for Kazakhstan
+    if (digits.length === 0) {
+      return '+7 ';
+    }
+    if (digits[0] !== '7') {
+      digits = '7' + digits;
+    }
+    
+    // Limit to 11 digits (7 + 10 digits)
+    digits = digits.slice(0, 11);
+    
+    // Format: +7 (XXX) XXX-XX-XX
+    let formatted = '+7';
+    if (digits.length > 1) {
+      formatted += ' (' + digits.slice(1, 4);
+    }
+    if (digits.length >= 4) {
+      formatted += ') ' + digits.slice(4, 7);
+    }
+    if (digits.length >= 7) {
+      formatted += '-' + digits.slice(7, 9);
+    }
+    if (digits.length >= 9) {
+      formatted += '-' + digits.slice(9, 11);
+    }
+    
+    return formatted;
+  };
+
+  const handlePhoneChange = (e) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setCustomerPhone(formatted);
+  };
 
   const applyPromocode = async () => {
     if (!promocode.trim()) return;
