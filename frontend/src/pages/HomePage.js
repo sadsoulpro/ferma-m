@@ -12,6 +12,7 @@ const HomePage = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [showCartHint, setShowCartHint] = useState(false);
 
   const filteredProducts = selectedCategory
     ? products.filter(p => p.category_id === selectedCategory)
@@ -23,6 +24,12 @@ const HomePage = () => {
   };
 
   const cartItemsCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  // Show hint when cart changes (item added)
+  const handleCartChange = () => {
+    setShowCartHint(true);
+    setTimeout(() => setShowCartHint(false), 3000);
+  };
 
   if (loading) {
     return (
