@@ -91,7 +91,7 @@ const HomePage = () => {
       {/* Hero Section */}
       <section className="py-8 md:py-12 lg:py-16 px-3 md:px-8 text-center">
         <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-primary mb-2 md:mb-4" style={{ fontFamily: 'Nunito, sans-serif' }}>
-          Здоровье на крыльях пчелы
+          ЗДОРОВЬЕ НА КРЫЛЬЯХ ПЧЕЛЫ
         </h2>
         <p className="text-muted-foreground text-sm md:text-base lg:text-lg max-w-xl mx-auto mb-4 md:mb-6 px-4">
           Натуральный мёд и пчелопродукты с пасеки прямо к вам

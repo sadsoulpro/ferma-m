@@ -36,7 +36,7 @@ const ProductModal = ({ product, category, isOpen, onClose, onAddToCart }) => {
           <DialogDescription>{product?.description || "Описание товара"}</DialogDescription>
         </VisuallyHidden>
         
-        {/* Close Button - Fixed position */}
+        {/* Close Button */}
         <button
           onClick={onClose}
           className="absolute right-3 top-3 z-20 p-2 bg-white/90 rounded-full hover:bg-white transition-colors shadow-md"
@@ -47,7 +47,80 @@ const ProductModal = ({ product, category, isOpen, onClose, onAddToCart }) => {
 
         {/* Scrollable Content */}
         <div className="overflow-y-auto flex-1 overscroll-contain">
-          <div className="flex flex-col md:grid md:grid-cols-2">
+          {/* Mobile Layout - Compact */}
+          <div className="md:hidden p-4">
+            {/* Compact Header with Image */}
+            <div className="flex gap-3 mb-4">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-20 h-20 object-cover rounded-xl flex-shrink-0"
+              />
+              <div className="flex-1 min-w-0">
+                {category && (
+                  <span className="text-primary text-xs font-semibold uppercase tracking-wider">
+                    {category.name}
+                  </span>
+                )}
+                <h2 className="text-lg font-bold text-foreground line-clamp-2" style={{ fontFamily: 'Nunito, sans-serif' }}>
+                  {product.name}
+                </h2>
+              </div>
+            </div>
+
+            {/* Description - Collapsed */}
+            {product.description && (
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">
+                {product.description}
+              </p>
+            )}
+
+            {/* Weight Selection */}
+            {hasWeights && (
+              <div className="mb-4">
+                <p className="text-xs font-semibold text-foreground mb-2 uppercase tracking-wider">
+                  Выберите вес:
+                </p>
+                <div className="grid grid-cols-3 gap-2">
+                  {product.weight_prices.map((wp, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedWeight(wp)}
+                      className={`weight-btn py-2.5 px-2 rounded-lg border-2 text-xs font-medium transition-all ${
+                        selectedWeight?.weight === wp.weight
+                          ? "border-primary bg-primary text-white"
+                          : "border-amber-200 bg-amber-50 text-foreground hover:border-primary"
+                      }`}
+                      data-testid={`weight-option-${wp.weight}`}
+                    >
+                      {wp.weight}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Price */}
+            <div className="flex items-center justify-between mb-4 py-3 px-4 bg-amber-50 rounded-xl">
+              <span className="text-sm font-semibold text-foreground">Цена:</span>
+              <span className="text-2xl font-bold text-primary" style={{ fontFamily: 'Nunito, sans-serif' }}>
+                {currentPrice} ₸
+              </span>
+            </div>
+
+            {/* Add to Cart Button */}
+            <Button
+              onClick={handleAddToCart}
+              className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-5 rounded-xl text-base btn-primary"
+              data-testid="add-to-cart-btn"
+            >
+              <ShoppingCart className="w-5 h-5 mr-2" />
+              В корзину
+            </Button>
+          </div>
+
+          {/* Desktop/Tablet Layout */}
+          <div className="hidden md:grid md:grid-cols-2">
             {/* Image Section */}
             <div className="relative aspect-square md:aspect-auto md:min-h-[400px] bg-amber-50 flex-shrink-0">
               <img
@@ -58,30 +131,26 @@ const ProductModal = ({ product, category, isOpen, onClose, onAddToCart }) => {
             </div>
 
             {/* Content Section */}
-            <div className="p-5 md:p-8 flex flex-col">
-              {/* Category Label */}
+            <div className="p-6 lg:p-8 flex flex-col">
               {category && (
-                <span className="text-primary text-xs md:text-sm font-semibold uppercase tracking-wider mb-2">
+                <span className="text-primary text-sm font-semibold uppercase tracking-wider mb-2">
                   {category.name}
                 </span>
               )}
 
-              {/* Title */}
-              <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-3 md:mb-4" style={{ fontFamily: 'Nunito, sans-serif' }}>
+              <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-4" style={{ fontFamily: 'Nunito, sans-serif' }}>
                 {product.name}
               </h2>
 
-              {/* Description */}
               {product.description && (
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4 md:mb-6">
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                   {product.description}
                 </p>
               )}
 
-              {/* Weight Selection */}
               {hasWeights && (
-                <div className="mb-4 md:mb-6">
-                  <p className="text-xs md:text-sm font-semibold text-foreground mb-2 md:mb-3 uppercase tracking-wider">
+                <div className="mb-6">
+                  <p className="text-sm font-semibold text-foreground mb-3 uppercase tracking-wider">
                     Выберите вес:
                   </p>
                   <div className="grid grid-cols-3 gap-2">
@@ -89,9 +158,9 @@ const ProductModal = ({ product, category, isOpen, onClose, onAddToCart }) => {
                       <button
                         key={index}
                         onClick={() => setSelectedWeight(wp)}
-                        className={`weight-btn py-2 px-2 md:px-3 rounded-lg border-2 text-xs md:text-sm font-medium transition-all ${
+                        className={`weight-btn py-2 px-3 rounded-lg border-2 text-sm font-medium transition-all ${
                           selectedWeight?.weight === wp.weight
-                            ? "border-primary bg-primary text-white selected"
+                            ? "border-primary bg-primary text-white"
                             : "border-amber-200 bg-amber-50 text-foreground hover:border-primary"
                         }`}
                         data-testid={`weight-option-${wp.weight}`}
@@ -103,20 +172,18 @@ const ProductModal = ({ product, category, isOpen, onClose, onAddToCart }) => {
                 </div>
               )}
 
-              {/* Price */}
-              <div className="mb-4 md:mb-6">
-                <span className="text-xs md:text-sm font-semibold text-primary uppercase tracking-wider">Цена</span>
-                <p className="text-2xl md:text-3xl font-bold text-foreground mt-1" style={{ fontFamily: 'Nunito, sans-serif' }}>
+              <div className="mb-6">
+                <span className="text-sm font-semibold text-primary uppercase tracking-wider">Цена</span>
+                <p className="text-3xl font-bold text-foreground mt-1" style={{ fontFamily: 'Nunito, sans-serif' }}>
                   {currentPrice} ₸
                 </p>
               </div>
 
-              {/* Add to Cart Button */}
               <div className="mt-auto pt-2">
                 <Button
                   onClick={handleAddToCart}
-                  className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-5 md:py-6 rounded-xl text-base md:text-lg btn-primary"
-                  data-testid="add-to-cart-btn"
+                  className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-6 rounded-xl text-lg btn-primary"
+                  data-testid="add-to-cart-btn-desktop"
                 >
                   <ShoppingCart className="w-5 h-5 mr-2" />
                   В корзину
