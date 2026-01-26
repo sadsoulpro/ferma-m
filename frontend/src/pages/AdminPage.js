@@ -505,7 +505,7 @@ const AdminPage = () => {
               </div>
               <div>
                 <Label>Граммовки и цены</Label>
-                <div className="flex gap-2 mb-2">
+                <div className="flex gap-2 mb-3">
                   <Input
                     placeholder="Вес (напр. 250гр)"
                     value={weightInput.weight}
@@ -521,12 +521,48 @@ const AdminPage = () => {
                     <Plus className="w-4 h-4" />
                   </Button>
                 </div>
-                <div className="space-y-1">
+                <div className="space-y-2">
                   {productForm.weight_prices.map((wp, index) => (
-                    <div key={index} className="flex items-center justify-between bg-gray-50 px-3 py-2 rounded-lg">
-                      <span className="text-sm">{wp.weight} - {wp.price} ₸</span>
-                      <Button type="button" variant="ghost" size="icon" onClick={() => removeWeightPrice(index)}>
-                        <X className="w-4 h-4" />
+                    <div key={index} className="flex items-center gap-2 bg-gray-50 p-2 rounded-lg">
+                      <div className="flex flex-col">
+                        <Button 
+                          type="button" 
+                          variant="ghost" 
+                          size="icon" 
+                          className="h-5 w-5"
+                          onClick={() => moveWeightPrice(index, -1)}
+                          disabled={index === 0}
+                        >
+                          <ChevronUp className="w-3 h-3" />
+                        </Button>
+                        <Button 
+                          type="button" 
+                          variant="ghost" 
+                          size="icon" 
+                          className="h-5 w-5"
+                          onClick={() => moveWeightPrice(index, 1)}
+                          disabled={index === productForm.weight_prices.length - 1}
+                        >
+                          <ChevronDown className="w-3 h-3" />
+                        </Button>
+                      </div>
+                      <Input
+                        value={wp.weight}
+                        onChange={(e) => updateWeightPrice(index, 'weight', e.target.value)}
+                        className="w-24 h-8 text-sm"
+                        placeholder="Вес"
+                      />
+                      <span className="text-gray-400">—</span>
+                      <Input
+                        type="number"
+                        value={wp.price}
+                        onChange={(e) => updateWeightPrice(index, 'price', e.target.value)}
+                        className="w-24 h-8 text-sm"
+                        placeholder="Цена"
+                      />
+                      <span className="text-sm text-gray-500">₸</span>
+                      <Button type="button" variant="ghost" size="icon" className="h-8 w-8 ml-auto" onClick={() => removeWeightPrice(index)}>
+                        <X className="w-4 h-4 text-red-400" />
                       </Button>
                     </div>
                   ))}
