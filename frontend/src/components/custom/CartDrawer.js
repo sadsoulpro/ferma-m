@@ -3,7 +3,7 @@ import { useCart } from "@/App";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ShoppingCart, X, Plus, Minus, MessageCircle, Send, Tag, Check } from "lucide-react";
+import { FaShoppingCart, FaTimes, FaPlus, FaMinus, FaWhatsapp, FaTelegramPlane, FaTag, FaCheck } from "react-icons/fa";
 import { toast } from "sonner";
 import axios from "axios";
 
