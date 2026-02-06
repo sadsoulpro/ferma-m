@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, Bug } from "lucide-react";
+import { FaChevronLeft } from "react-icons/fa";
+import { GiHoneycomb } from "react-icons/gi";
 
 const PrivacyPage = () => {
   const navigate = useNavigate();
@@ -13,11 +14,11 @@ const PrivacyPage = () => {
             onClick={() => navigate("/")} 
             className="p-2 hover:bg-secondary rounded-full transition-colors"
           >
-            <ChevronLeft className="w-5 h-5 text-foreground" />
+            <FaChevronLeft className="w-5 h-5 text-foreground" />
           </button>
           <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-              <Bug className="w-4 h-4 text-white" />
+              <GiHoneycomb className="w-4 h-4 text-white" />
             </div>
             <span className="font-bold text-foreground" style={{ fontFamily: 'Nunito, sans-serif' }}>
               Ферма Медовик
