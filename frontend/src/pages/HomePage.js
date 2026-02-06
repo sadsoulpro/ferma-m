@@ -90,15 +90,15 @@ const HomePage = () => {
 
       {/* Hero Section */}
       <section className="py-8 md:py-12 lg:py-16 px-3 md:px-8 text-center">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-primary mb-2 md:mb-4" style={{ fontFamily: 'Nunito, sans-serif' }}>
+        <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black text-primary mb-2 md:mb-4" style={{ fontFamily: 'Nunito, sans-serif' }}>
           ЗДОРОВЬЕ НА КРЫЛЬЯХ ПЧЕЛЫ
         </h2>
-        <p className="text-muted-foreground text-sm md:text-base lg:text-lg max-w-xl mx-auto mb-4 md:mb-6 px-4">
+        <p className="text-muted-foreground text-sm md:text-base lg:text-lg max-w-xl mx-auto mb-4 md:mb-6 px-4 font-bold">
           Натуральный мёд и пчелопродукты с пасеки прямо к вам
         </p>
         <div className="inline-flex items-center gap-2 bg-white px-3 py-1.5 md:px-4 md:py-2 rounded-full shadow-sm border border-border/50">
           <span className="text-red-500 text-sm md:text-base">❤️</span>
-          <span className="text-xs md:text-sm font-medium text-foreground">100% Натурально</span>
+          <span className="text-xs md:text-sm font-black text-foreground">100% Натурально</span>
         </div>
       </section>
 
