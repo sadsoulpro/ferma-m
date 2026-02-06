@@ -58,11 +58,11 @@ const ProductModal = ({ product, category, isOpen, onClose, onAddToCart }) => {
               />
               <div className="flex-1 min-w-0">
                 {category && (
-                  <span className="text-primary text-xs font-semibold uppercase tracking-wider">
+                  <span className="text-primary text-xs font-black uppercase tracking-wider">
                     {category.name}
                   </span>
                 )}
-                <h2 className="text-lg font-bold text-foreground line-clamp-2" style={{ fontFamily: 'Nunito, sans-serif' }}>
+                <h2 className="text-lg font-black text-foreground" style={{ fontFamily: 'Nunito, sans-serif' }}>
                   {product.name}
                 </h2>
               </div>
@@ -70,7 +70,7 @@ const ProductModal = ({ product, category, isOpen, onClose, onAddToCart }) => {
 
             {/* Description - Collapsed */}
             {product.description && (
-              <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2 font-bold">
                 {product.description}
               </p>
             )}
@@ -78,7 +78,7 @@ const ProductModal = ({ product, category, isOpen, onClose, onAddToCart }) => {
             {/* Weight Selection */}
             {hasWeights && (
               <div className="mb-4">
-                <p className="text-xs font-semibold text-foreground mb-2 uppercase tracking-wider">
+                <p className="text-xs font-black text-foreground mb-2 uppercase tracking-wider">
                   Выберите вес:
                 </p>
                 <div className="grid grid-cols-3 gap-2">
@@ -86,7 +86,7 @@ const ProductModal = ({ product, category, isOpen, onClose, onAddToCart }) => {
                     <button
                       key={index}
                       onClick={() => setSelectedWeight(wp)}
-                      className={`weight-btn py-2.5 px-2 rounded-lg border-2 text-xs font-medium transition-all ${
+                      className={`weight-btn py-2.5 px-2 rounded-lg border-2 text-xs font-black transition-all ${
                         selectedWeight?.weight === wp.weight
                           ? "border-primary bg-primary text-white"
                           : "border-amber-200 bg-amber-50 text-foreground hover:border-primary"
@@ -102,8 +102,8 @@ const ProductModal = ({ product, category, isOpen, onClose, onAddToCart }) => {
 
             {/* Price */}
             <div className="flex items-center justify-between mb-4 py-3 px-4 bg-amber-50 rounded-xl">
-              <span className="text-sm font-semibold text-foreground">Цена:</span>
-              <span className="text-2xl font-bold text-primary" style={{ fontFamily: 'Nunito, sans-serif' }}>
+              <span className="text-sm font-black text-foreground">Цена:</span>
+              <span className="text-2xl font-black text-primary" style={{ fontFamily: 'Nunito, sans-serif' }}>
                 {currentPrice} ₸
               </span>
             </div>
@@ -111,7 +111,7 @@ const ProductModal = ({ product, category, isOpen, onClose, onAddToCart }) => {
             {/* Add to Cart Button */}
             <Button
               onClick={handleAddToCart}
-              className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-5 rounded-xl text-base btn-primary"
+              className="w-full bg-primary hover:bg-primary/90 text-white font-black py-5 rounded-xl text-base btn-primary"
               data-testid="add-to-cart-btn"
             >
               <ShoppingCart className="w-5 h-5 mr-2" />
