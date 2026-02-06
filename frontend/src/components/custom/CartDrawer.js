@@ -330,7 +330,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
             <div className="space-y-2">
               <Button
                 onClick={orderViaWhatsApp}
-                className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-4 md:py-5 text-sm md:text-base"
+                className="w-full bg-green-500 hover:bg-green-600 text-white font-black py-4 md:py-5 text-sm md:text-base"
                 data-testid="order-whatsapp-btn"
               >
                 <MessageCircle className="w-4 h-4 md:w-5 md:h-5 mr-2" />
@@ -338,7 +338,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
               </Button>
               <Button
                 onClick={orderViaTelegram}
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-4 md:py-5 text-sm md:text-base"
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-black py-4 md:py-5 text-sm md:text-base"
                 data-testid="order-telegram-btn"
               >
                 <Send className="w-4 h-4 md:w-5 md:h-5 mr-2" />
