@@ -51,17 +51,17 @@ const ProductCard = ({ product, category, onOpenModal }) => {
 
       {/* Content - pointer-events-none для текста, но pointer-events-auto для кнопки */}
       <div className="p-3 md:p-4 pointer-events-none">
-        <h3 className="font-semibold text-foreground mb-1 line-clamp-1 text-sm md:text-base" style={{ fontFamily: 'Nunito, sans-serif' }}>
+        <h3 className="font-black text-foreground mb-1 text-sm md:text-base md:line-clamp-1" style={{ fontFamily: 'Nunito, sans-serif' }}>
           {product.name}
         </h3>
         
-        <p className="text-primary font-bold text-base md:text-lg mb-2 md:mb-3">
+        <p className="text-primary font-black text-base md:text-lg mb-2 md:mb-3">
           {displayPrice} ₸
         </p>
 
         <Button
           onClick={onOpenModal}
-          className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-2 md:py-2.5 rounded-lg btn-primary text-sm md:text-base pointer-events-auto"
+          className="w-full bg-primary hover:bg-primary/90 text-white font-black py-2 md:py-2.5 rounded-lg btn-primary text-sm md:text-base pointer-events-auto"
           data-testid={`select-product-${product.id}`}
         >
           Выбрать
