@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Bug } from "lucide-react";
 
 const ProductCard = ({ product, category, onOpenModal }) => {
   const displayPrice = product.weight_prices?.length > 0
