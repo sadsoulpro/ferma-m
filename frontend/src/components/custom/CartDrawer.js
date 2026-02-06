@@ -248,21 +248,21 @@ const CartDrawer = ({ isOpen, onClose }) => {
             {/* Subtotal & Discount */}
             <div className="space-y-1">
               <div className="flex justify-between items-center text-sm">
-                <span className="text-muted-foreground">Сумма:</span>
-                <span className="text-foreground">{cartTotal} ₸</span>
+                <span className="text-muted-foreground font-bold">Сумма:</span>
+                <span className="text-foreground font-bold">{cartTotal} ₸</span>
               </div>
               {appliedPromo && (
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-green-600 flex items-center gap-1">
+                  <span className="text-green-600 flex items-center gap-1 font-bold">
                     <Tag className="w-3 h-3" />
                     Скидка ({appliedPromo.code}):
                   </span>
-                  <span className="text-green-600">-{discount} ₸</span>
+                  <span className="text-green-600 font-bold">-{discount} ₸</span>
                 </div>
               )}
               <div className="flex justify-between items-center pt-1 border-t border-border/30">
-                <span className="font-semibold text-foreground text-sm md:text-base">Итого:</span>
-                <span className="text-lg md:text-xl font-bold text-foreground" style={{ fontFamily: 'Nunito, sans-serif' }}>
+                <span className="font-black text-foreground text-sm md:text-base">Итого:</span>
+                <span className="text-lg md:text-xl font-black text-foreground" style={{ fontFamily: 'Nunito, sans-serif' }}>
                   {finalTotal} ₸
                 </span>
               </div>
