@@ -78,7 +78,7 @@ const HomePage = () => {
           <div className="flex items-center gap-2 md:gap-3">
             <a href="/" className="flex items-center gap-2 md:gap-3 hover:opacity-80 transition-opacity">
               <div className="w-8 h-8 md:w-10 md:h-10 bg-primary rounded-full flex items-center justify-center">
-                <Bug className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                <GiHoneycomb className="w-4 h-4 md:w-5 md:h-5 text-white" />
               </div>
               <div>
                 <h1 className="font-black text-sm md:text-lg text-foreground" style={{ fontFamily: 'Nunito, sans-serif' }}>
