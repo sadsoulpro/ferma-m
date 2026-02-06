@@ -1,13 +1,71 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useCart } from "@/App";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FaShoppingCart, FaTimes, FaPlus, FaMinus, FaWhatsapp, FaTelegramPlane, FaTag, FaCheck } from "react-icons/fa";
+import { GiHoneycomb } from "react-icons/gi";
 import { toast } from "sonner";
 import axios from "axios";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+
+// Компонент промежуточного уведомления
+const RedirectNotification = ({ isOpen, onClose, messenger, countdown, url }) => {
+  const isWhatsApp = messenger === 'whatsapp';
+  
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="sm:max-w-md p-0 overflow-hidden border-0 rounded-2xl">
+        {/* Header */}
+        <div className={`p-6 text-center ${isWhatsApp ? 'bg-green-500' : 'bg-blue-500'}`}>
+          <div className="w-16 h-16 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center">
+            {isWhatsApp ? (
+              <FaWhatsapp className="w-8 h-8 text-white" />
+            ) : (
+              <FaTelegramPlane className="w-8 h-8 text-white" />
+            )}
+          </div>
+          <h3 className="text-xl font-black text-white" style={{ fontFamily: 'Nunito, sans-serif' }}>
+            Заказ сформирован!
+          </h3>
+        </div>
+        
+        {/* Content */}
+        <div className="p-6 text-center bg-white">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <GiHoneycomb className="w-5 h-5 text-primary" />
+            <span className="text-sm font-bold text-muted-foreground">Ферма Медовик</span>
+          </div>
+          
+          <p className="text-foreground font-bold mb-4">
+            Сейчас вы будете перенаправлены в {isWhatsApp ? 'WhatsApp' : 'Telegram'}
+          </p>
+          
+          <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
+            <p className="text-sm font-black text-amber-800">
+              ⚠️ ВАЖНО
+            </p>
+            <p className="text-sm text-amber-700 mt-1 font-bold">
+              После перехода нажмите кнопку «Отправить» в самом чате, чтобы мы получили ваш заказ
+            </p>
+          </div>
+          
+          {/* Countdown */}
+          <div className="flex items-center justify-center gap-3">
+            <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-black text-xl ${isWhatsApp ? 'bg-green-500' : 'bg-blue-500'}`}>
+              {countdown}
+            </div>
+            <span className="text-muted-foreground font-bold text-sm">
+              Переход через {countdown} сек...
+            </span>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
 const CartDrawer = ({ isOpen, onClose }) => {
   const { cart, removeFromCart, updateQuantity, cartTotal, clearCart } = useCart();
@@ -16,6 +74,12 @@ const CartDrawer = ({ isOpen, onClose }) => {
   const [promocode, setPromocode] = useState("");
   const [appliedPromo, setAppliedPromo] = useState(null);
   const [promoLoading, setPromoLoading] = useState(false);
+  
+  // State for redirect notification
+  const [showRedirectNotification, setShowRedirectNotification] = useState(false);
+  const [redirectMessenger, setRedirectMessenger] = useState(null);
+  const [redirectCountdown, setRedirectCountdown] = useState(4);
+  const [redirectUrl, setRedirectUrl] = useState("");
 
   const discount = appliedPromo?.discount || 0;
   const finalTotal = Math.max(0, cartTotal - discount);
