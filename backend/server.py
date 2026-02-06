@@ -256,6 +256,38 @@ async def create_order(order: OrderCreate):
     await db.orders.insert_one(order_dict)
     return Order(**order_dict)
 
+# About Us
+@api_router.get("/about")
+async def get_about():
+    about = await db.about.find_one({"id": "about-us"}, {"_id": 0})
+    if not about:
+        # Default content
+        default_about = {
+            "id": "about-us",
+            "title": "О нас",
+            "description": "Ферма Медовик — это семейная пасека, расположенная в экологически чистом районе. Мы занимаемся пчеловодством более 15 лет и гордимся качеством нашей продукции. Каждый наш продукт — это результат любви к природе и заботы о здоровье наших покупателей.",
+            "features": [
+                "100% натуральная продукция",
+                "Экологически чистый район",
+                "Более 15 лет опыта",
+                "Доставка по всему Казахстану"
+            ]
+        }
+        await db.about.insert_one(default_about)
+        return default_about
+    return about
+
+@api_router.put("/about")
+async def update_about(data: AboutUsUpdate, admin: str = Depends(verify_admin)):
+    update_data = data.model_dump()
+    update_data["id"] = "about-us"
+    await db.about.update_one(
+        {"id": "about-us"},
+        {"$set": update_data},
+        upsert=True
+    )
+    return {"success": True, "message": "About Us updated"}
+
 # Products
 @api_router.get("/products", response_model=List[Product])
 async def get_products(category_id: Optional[str] = None):
