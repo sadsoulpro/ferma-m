@@ -53,10 +53,10 @@ const HomePage = () => {
                 <span className="text-white text-sm md:text-lg">🐝</span>
               </div>
               <div>
-                <h1 className="font-bold text-sm md:text-lg text-foreground" style={{ fontFamily: 'Nunito, sans-serif' }}>
+                <h1 className="font-black text-sm md:text-lg text-foreground" style={{ fontFamily: 'Nunito, sans-serif' }}>
                   Ферма Медовик
                 </h1>
-                <p className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wider hidden sm:block">онлайн магазин</p>
+                <p className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wider hidden sm:block font-bold">онлайн магазин</p>
               </div>
             </a>
           </div>
