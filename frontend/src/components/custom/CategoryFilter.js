@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const CategoryFilter = ({ categories, selectedCategory, onSelectCategory }) => {
   const scrollRef = useRef(null);
