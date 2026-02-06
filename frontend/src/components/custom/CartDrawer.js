@@ -146,30 +146,62 @@ const CartDrawer = ({ isOpen, onClose }) => {
     }
   };
 
-  const orderViaWhatsApp = async () => {
-    if (!validateOrder()) return;
-    
-    const saved = await saveOrder();
-    if (saved) {
-      toast.success("Заказ сохранён!");
+  // Проверка запуска внутри Telegram WebApp
+  const isTelegramWebApp = () => {
+    return typeof window !== 'undefined' && window.Telegram && window.Telegram.WebApp;
+  };
+
+  // Функция открытия внешней ссылки с учётом окружения
+  const openExternalLink = (url, isTelegramLink = false) => {
+    if (isTelegramWebApp()) {
+      const tg = window.Telegram.WebApp;
+      if (isTelegramLink && tg.openTelegramLink) {
+        // Для ссылок на Telegram используем openTelegramLink
+        tg.openTelegramLink(url);
+      } else if (tg.openLink) {
+        // Для внешних ссылок (WhatsApp) используем openLink
+        tg.openLink(url);
+      } else {
+        // Fallback
+        window.location.href = url;
+      }
+    } else {
+      // Для Safari и других браузеров - прямой переход
+      window.location.href = url;
     }
+  };
+
+  const orderViaWhatsApp = () => {
+    if (!validateOrder()) return;
     
     const message = encodeURIComponent(formatOrderMessage());
     const whatsappUrl = `https://wa.me/77083214571?text=${message}`;
-    window.open(whatsappUrl, "_blank");
+    
+    // Сначала открываем ссылку (синхронно, до любых await)
+    openExternalLink(whatsappUrl, false);
+    
+    // Сохраняем заказ в фоновом режиме
+    saveOrder().then(saved => {
+      if (saved) {
+        console.log("Order saved in background");
+      }
+    });
   };
 
-  const orderViaTelegram = async () => {
+  const orderViaTelegram = () => {
     if (!validateOrder()) return;
     
-    const saved = await saveOrder();
-    if (saved) {
-      toast.success("Заказ сохранён!");
-    }
+    const telegramUrl = `https://t.me/fermamedovik`;
     
-    const message = encodeURIComponent(formatOrderMessage());
-    const telegramUrl = `https://t.me/fermamedovik?text=${message}`;
-    window.open(telegramUrl, "_blank");
+    // Сначала открываем ссылку (синхронно, до любых await)
+    openExternalLink(telegramUrl, true);
+    
+    // Сохраняем заказ в фоновом режиме
+    saveOrder().then(saved => {
+      if (saved) {
+        console.log("Order saved in background");
+      }
+    });
   };
 
   return (
